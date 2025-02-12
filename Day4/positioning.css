@@ -1,0 +1,47 @@
+.relative-pos{
+    /* defaul position is static */
+    position: relative;
+    left : 50px;
+    top: 50px;
+    z-index: 3;
+}
+.relative-pos1{
+    /* defaul position is static */
+    background-color: greenyellow;
+    position: relative;
+    /* left : 50px;
+    top: 50px; */
+    z-index: 2;
+}
+.relative-pos2{
+    /* defaul position is static */
+    background-color: aqua;
+    position: relative;
+    left : 50px;
+    top: 50px;
+    z-index: 1;
+}
+
+/* class with the largest z-index will be on top over other classes */
+
+/* .div-pos{
+    position: relative;
+    margin: 180px;
+    width: 300px;
+    height: 300px;
+
+    border: 10px solid goldenrod;
+} */
+
+.absolute-pos{
+    /* defaul position is static */
+    position: absolute;
+    left : 50px;
+    top: 50px;
+    z-index: 3;
+}
+
+.sticky-pos{
+    position: sticky;
+    top : 10px;
+}
