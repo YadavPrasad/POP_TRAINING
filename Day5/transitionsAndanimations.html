@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transition and Animations</title>
+    <link rel = "stylesheet" href="transitionsAndanimations.css">
+    <style>
+        .transition{
+            color : dimgray;
+            background-color: beige;
+            transition: background-color 5s, padding 10s, width 2s, height 4s, transform 1msb ;
+            
+        }
+
+        .transition:hover {
+            background-color: dimgray;
+            color : beige;
+            padding: 30px;
+            height : 100px;
+            width : 300px;
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <h1 class="transition">This is a Transition Example.</h1>
+</body>
+</html>
