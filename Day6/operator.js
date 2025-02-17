@@ -32,3 +32,15 @@ console.log(5 =='5');
 console.log(5 ==='5');
 console.log(5 != '5');
 console.log(5 !== '5');
+
+c=1
+console.log(~c);
+
+//LSO
+console.log(55<<3);
+console.log(128<<1);
+//RSO
+console.log(55>>3);
+console.log(8>>3);
+console.log(1>>1);
+
