@@ -18,15 +18,5 @@ for([key, value] of Object.entries(object1)) {
 }
 
 
-var testArrowFunction = () => {
-    console.log("This is test arrow function");
-}
 
-testArrowFunction();
-
-function testFunction() {
-    console.log(object);
-}
-
-testFunction();
 
