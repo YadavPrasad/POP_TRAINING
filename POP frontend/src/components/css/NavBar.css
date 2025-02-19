@@ -1,0 +1,10 @@
+
+
+nav{
+    display: flex;
+    list-style-type: none;
+    background-color: wheat;
+    color: black;
+    justify-content: space-evenly;
+    padding : 10px;
+}
