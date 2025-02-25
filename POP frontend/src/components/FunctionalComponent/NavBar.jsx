@@ -82,6 +82,11 @@ const Navbar = () => {
             Login
           </Link>
         </li>
+        <li>
+          <Link to="/res" className="link">
+            PropsDrill 
+          </Link>
+        </li>
       </nav>
     </header>
   );

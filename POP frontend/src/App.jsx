@@ -13,7 +13,10 @@ import UseMemo from "./components/FunctionalComponent/Hooks/UseMemo";
 import UseCallback from "./components/FunctionalComponent/Hooks/UseCallback";
 import UseMemoize from "./components/FunctionalComponent/Hooks/UseMemoize";
 import HoC from "./components/FunctionalComponent/HoC/HoC";
-
+import StudentResults from "./components/FunctionalComponent/StudentResults.jsx";
+import Faculty from "./components/FunctionalComponent/Faculty.jsx";
+import Exam from "./components/FunctionalComponent/Exam.jsx";
+import COE from "./components/FunctionalComponent/COE.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -24,6 +27,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contacts" element={<Contacts />} />
+        <Route path="/res" element={<Exam sgpa ="10 sgpa" cgpa = "10 cgpa"/>} />
        
       </Routes>
     </BrowserRouter>
