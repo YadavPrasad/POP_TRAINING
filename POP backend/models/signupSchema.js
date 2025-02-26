@@ -5,8 +5,8 @@ const signupSchema = mdb.Schema({
     lastName:String,
     email:String,
     password:String,
-    phoneNumber:Number
+    age:Number
 })
 
 const signup_schema = mdb.model("signup", signupSchema)
-module.exports = signupSchema;
+module.exports = signup_schema; 

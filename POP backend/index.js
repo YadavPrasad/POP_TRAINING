@@ -1,45 +1,78 @@
 const express = require("express");
-const mdb = require("mongoose");
-const dotenv = require('dotenv')
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const bodyParser = require("body-parser");
+const signup_schema = require("./models/signupSchema");
+const bcrypt = require('bcrypt');
+
+dotenv.config();
+
 const app = express();
-const PORT = 3001;
-const signup = require('./models/signupSchema')
-dotenv.config()
 app.use(express.json())
 
-mdb
-  .connect("mongodb+srv://yadavprasadexe:yadavprasadexe@cluster.aqxtw.mongodb.net/")
-  .then(() => {
-    console.log("MDB connection succesful");
-  })
-  .catch((err) => {
-    console.log("Check your connection string", err);
-  });
+console.log("MONGODB_URL:", "mongodb+srv://yadav:yadav@cluster.aqxtw.mongodb.net/");
+
+mongoose
+  .connect("mongodb+srv://yadav:yadav@cluster.aqxtw.mongodb.net/", { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB connected successfully"))
+  .catch((err) => console.error("MongoDB Connection Failed:", err));
 
 app.get("/", (req, res) => {
-  res.send("<h1>Welcome to Backend Server </h1>");
+  res.send("<h1>Hello Backend</h1>");
 });
 
-app.listen(PORT, () => console.log("Server started successfully."));
+app.post("/signup", async (req, res) => {
+  const { firstName, lastName, email, age, password} = req.body;
+  console.log(firstName, lastName);
 
-app.post("/signup",(req,res)=>{
-  try{
-    const{firstName,lastName,email,password,phoneNumber} = req.body;
-  const newSignup = new Signup({
-    firstName:firstName,
-    lastName:lastName,
-    phoneNumber:phoneNumber,
-    password:password,
-    email:email
-  })
-  newSignup.save();
-  console.log("Signup Succesful")
-  res.status(201).json({message:"Signup Succsesful",isSignup:true})
-
-  } catch(error){
-    console.error("Signup Error:", error)
-    res.status(201).json({message:"Signup Unsuccsesful",isSignup:false})
-
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newSignup = new   signup_schema({
+      firstName: firstName,
+      lastName: lastName, 
+      email : email,
+      password : hashedPassword,
+      age : age
+    });
+    await newSignup.save();
+    res.status(200).json(newSignup);
+  } catch (err) {
+    console.error("Signup error:", err);
+    res.status(400).json({ msg: "Signup unsuccess", error: err.message });
   }
-  
+});
+
+app.get('/getuserdet', async (req, res)=> {
+  const allusers = await signup_schema.find();
+  console.log(allusers);
+  res.json({msg:"Signup Details Fetched"});
 })
+
+app.post('/login', async (req, res) => {
+  console.log(req.body)
+  try{
+    const {email, password} = req.body;
+    const isExistingUser = await signup_schema.findOne({email:email });
+    console.log(isExistingUser)
+    if(isExistingUser){
+      console.log(password, isExistingUser.password)
+      const isValidPass = await bcrypt.compare(password, isExistingUser.password);
+      console.log(isValidPass)
+      if(isValidPass){
+        return res.status(200).json({msg: "Login Successfully"})
+      }else{
+       return  res.status(200).json({msg: "Incorrect Password"})
+      }
+    }else{
+       return res.status(400).json({msg:"User not Found Please Signin First"})
+    }
+  }catch(err){
+    return  res.status(400).json({msg : "Erro occurred in Login"})
+  }
+})
+
+
+const PORT = process.env.PORT || 3002;
+app.listen(PORT, () => {
+  console.log("Server running on port ${PORT}");
+});
