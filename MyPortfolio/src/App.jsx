@@ -1,16 +1,15 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from './MyPortfolio/src/Components/HomePage.jsx';
-import NavbarPage from './MyPortfolio/src/Components/NavbarPage.jsx';
+import Navbar from './Components/Navbar/Navbar';
+import Profile from './Components/Profile/profile';
 
-function App() {
+
+
+const App = () => {
   return (
-    <BrowserRouter>
-      <NavbarPage />
-      <Routes>
-        <Route path="/homepage" element={<HomePage />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    <div id = 'root'>
+      <Navbar />
+      <Profile />
+    </div>
+  )
 }
-export default App;
+export default App
